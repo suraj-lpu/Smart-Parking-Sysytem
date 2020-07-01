@@ -1,0 +1,117 @@
+from datetime import datetime
+print("If you want to access this portal press 1")
+print("if u dont want to access this portal press 2")
+print("\n")
+b=int(input())
+print("\n")
+l=[0,0,0,0,0,0,0,0,0,0]
+l1=[]
+while(b==1):
+    
+    
+    print("Enter 1 if u want to park your car")
+    print("Enter 2 if u want to reserve your car")
+    print("Enter 3 if u want to unpark your car")
+    print("Enter 4 if u want to see parking report")
+    print("\n")
+    a=int(input())
+    token=0
+    flag=0
+    if(a==1):
+        print("Enter 1 if you have already reserved your car")
+        print("Enter any number if you haven't reserved your car")
+        re=int(input())
+        if(re==1):
+            print("Kindly enter your token number:")
+            token_number=int(input())
+            l[token_number]=1
+            for i in range(3,len(l1),6):
+                if((l1[i]==token_number)):
+                    l1[i+1]=str(datetime.now())
+                    l1[i+2]=str("Still in parking!!!")
+
+        else:
+            
+            print("Please provide your necessary details")
+            name=input("Please tell your sweet name:\t")
+    
+            number=int(input("Please provide your phone number:\t"))
+    
+            adhar=int(input("Please provide your aadhar card details:\t"))
+    
+            for i in range(0,len(l)):
+                if(l[i]==0):
+                    token=i
+                    flag=1
+                    l[i]=1
+                    break
+            if(flag==0):
+                print("Sorry no parking slot is available at the moment.PLease try again after some time")
+            else:
+                l1.append(name)
+                l1.append(number)
+                l1.append(adhar)
+                l1.append(token)
+                l1.append(str(datetime.now()))
+                l1.append(str("Still in parking!!!"))
+                print("Kindly remember your token number is:",token)
+    
+    elif(a==2):
+        l2=[]
+        for i in range(0,len(l)):
+            if(l[i]==0):
+                l2.append(str(i+1))
+                flag=1
+        if(flag==1):
+            print("You can select parking slots from below")
+            for i in range(0,len(l2)):
+                print(l2[i],end=" ")
+            print("\n")
+            choose=int(input())
+            name=input("Please tell your sweet name:\t")
+    
+            number=int(input("Please provide your phone number:\t"))
+    
+            adhar=int(input("Please provide your aadhar card details:\t"))
+            
+            l[(choose)-1]=1
+            token=choose-1
+            l1.append(name)
+            l1.append(number)
+            l1.append(adhar)
+            l1.append(token)
+            l1.append("Reserved")
+            l1.append(str("Still not arrived"))
+            print("Your car has been reserved")
+            print("Please remember your token number is:",token)
+        else:
+            print("Sorry no free parking slot is available at the moment")
+    elif(a==3):
+        print("please enter your token number")
+        unpark=int(input())
+        if(l[unpark]==1):
+            l[unpark]=0
+            for i in range(3,len(l1),6):
+                if((l1[i]==unpark)):
+                    l1[i+2]=str(datetime.now())
+
+        else:
+            print("sorry no car is parked at this particular token number")
+    elif(a==4):
+        print("Please provide a admin name to view parking report")
+        name=input()
+        if(name.lower()=="pooja mam"):
+            print("name","|\t","phno","|\t","adhar","|\t","token","|\t","entry date","|\t\t\t","exit date")
+            for i in range(0,len(l1),6):
+                print(l1[i],"\t",l1[i+1],"\t",l1[i+2],"\t",l1[i+3],"\t",l1[i+4],"\t",l1[i+5])
+        else:
+            print("sorry u cant")
+    else:
+        print("Sorry not found expected input")
+    print("\n")
+    print("If you want to access this portal press 1")
+    print("if u dont want to access this portal press 2")
+    print("\n")
+    b=int(input())
+    print("\n")
+    
